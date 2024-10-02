@@ -8,9 +8,15 @@ fun main() {
     playingChips.shuffle()
     do {
         displayPlayingField(playingChips)
-        print("Enter number You want to move or \"Q\" for quit : ")
+        print("Enter number You want to move or \"q\" for quit : ")
         val step = readln()
-        val numberForMove: Int?  = step.toIntOrNull()
+        val numberForMove: Int? = step.toIntOrNull()
+        if(numberForMove != null) {
+            if(isInputValid(numberForMove.toInt())) {
+                makeMove(playingChips, numberForMove.toInt())
+            }
+        }
+
     } while (numberForMove != null)
     println(
         """Thank You for playing!
@@ -28,4 +34,22 @@ fun displayPlayingField(playingChips: Array<Int>) {
         println(" |")
     }
     println("----------------------")
+}
+
+fun isInputValid(number: Int): Boolean {
+    return isInputInRange(number) && isStepPossible(number)
+}
+
+fun isInputInRange(number: Int): Boolean {
+    if(number in 1..15) {
+        return true
+    } else {
+        println("Number has to be from 1 to 15 (all inclusive)")
+        return false
+    }
+
+}
+
+fun makeMove(inputArray: Array<Int>, numberForMove: Int): Array<Int> {
+
 }
