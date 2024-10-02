@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/JetPackCompose" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/SpotsGame" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/TheoryTesting" vcs="Git" />
