@@ -1,0 +1,70 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration files (IDE)
+.idea/
+*.iml
+*.hprof
+
+# User-specific configurations
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+
+# Android-specific files
+/captures/
+/.externalNativeBuild/
+
+# IntelliJ
+.idea/
+.idea/misc.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/vcs.xml
+.idea/libraries/
+/.idea/assetWizardSettings.xml
+.idea/compiler.xml
+.idea/copyright/
+.idea/encodings.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/workspace.xml
+
+# Keystore files
+*.jks
+
+# Gradle caches
+.gradle/
+build/
+/build
+**/build
+**/local.properties
+!gradle-wrapper.jar
+.gradle/
+local.properties
+.gradle/
+build/
+local.properties
+
+# Android-specific build folders
+app/build/
+**/build
+
+# Android Studio project files
+.idea/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+*.iml
+
+# Proguard folder generated for Android
+proguard/
+
+# Log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
