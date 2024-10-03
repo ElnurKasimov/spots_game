@@ -9,7 +9,7 @@ fun main() {
     playingChips.shuffle()
     do {
         displayPlayingField(playingChips)
-        print("Enter number You want to move or \"q\" for quit : ")
+        print("Enter number You want to move or any letter for quit : ")
         val step = readln()
         val numberForMove: Int? = step.toIntOrNull()
         if(numberForMove != null) {
