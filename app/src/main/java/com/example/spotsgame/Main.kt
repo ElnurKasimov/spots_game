@@ -1,7 +1,6 @@
 package com.example.spotsgame
 
 import android.annotation.SuppressLint
-import kotlin.random.Random
 
 fun main() {
     println("Welcome to the Spot Game")
@@ -9,6 +8,10 @@ fun main() {
     playingChips.shuffle()
     do {
         displayPlayingField(playingChips)
+        if(isGameComplete(playingChips)) {
+            println("You win!")
+            break
+        }
         print("Enter number You want to move or any letter for quit : ")
         val step = readln()
         val numberForMove: Int? = step.toIntOrNull()
@@ -39,6 +42,11 @@ fun displayPlayingField(playingChips: Array<Int>) {
         println(" |")
     }
     println("----------------------")
+}
+
+fun isGameComplete(playingChips: Array<Int> ): Boolean {
+    val final = Array(16){ it + 1 }
+    return playingChips.contentEquals(final)
 }
 
 fun isInputValid(playingChips: Array<Int>, number: Int): Boolean {
