@@ -14,14 +14,16 @@ fun main() {
         displayPlayingField(oldState)
         val numberForMove = readCell()
         if(numberForMove == null) {
+            println("Thank You for playing!")
             break
         } else {
             oldState = engine.transitionState(oldState, numberForMove)
         }
     }
-    println(
-        """Thank You for playing!
-           |GoodLuck!""".trimMargin())
+    if(engine.isWin(oldState)) {
+        println("Congratulations, you've won!!")
+    }
+    println("GoodLuck!")
 }
 
 fun readCell(

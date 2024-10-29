@@ -1,6 +1,43 @@
 package com.example.spotsgame
 
 class Engine(): FifteenEngine {
+
+    override fun getInitialState(): List<Int> {
+        var playingChips: List<Int>
+        do {
+            playingChips = List(16){ it + 1 }.toMutableList().shuffled()
+        } while (isSolvable(playingChips))
+        return playingChips
+    }
+
+    private fun isSolvable(list: List<Int>): Boolean {
+        val inversions = countInversions(list)
+        val blankRow = blankRowFromBottom(list)
+        return if (4 % 2 == 0) {
+            (inversions % 2 == 0) == (blankRow % 2 != 0)
+        } else {
+            inversions % 2 == 0
+        }
+    }
+
+    private fun blankRowFromBottom(list: List<Int>): Int {
+        val gridSize = 4
+        val blankIndex = list.indexOf(0)
+        return gridSize - (blankIndex / gridSize)
+    }
+
+    private fun countInversions(list: List<Int>): Int {
+        var inversions = 0
+        for (i in list.indices) {
+            for (j in i + 1 until list.size) {
+                if (list[i] != 0 && list[j] != 0 && list[i] > list[j]) {
+                    inversions++
+                }
+            }
+        }
+        return inversions
+    }
+
     override fun transitionState(oldState: List<Int>, cell: Int): List<Int> {
         val indexFromMove = com.example.spotsgame.oldState.indexOf(cell)
         val indexToMove = com.example.spotsgame.oldState.indexOf(16)
@@ -14,31 +51,17 @@ class Engine(): FifteenEngine {
         return playingChips == final
     }
 
-    override fun getInitialState(): List<Int> {
-        val playingChips = List(16){ it + 1 }.toMutableList()
-        return playingChips.shuffled()
-    }
-
-    override fun isInputValid(playingChips: List<Int>, number: Int): Boolean {
-        return isInputInRange(number) && isStepPossible(playingChips, number)
-    }
-
     fun isInputInRange(number: Int): Boolean  = number in 1..15
 
-    fun isStepPossible(inputList: List<Int>, numberForMove: Int): Boolean {
+    override fun isStepPossible(inputList: List<Int>, numberForMove: Int): Boolean {
         val indexToMove = inputList.indexOf(numberForMove)
-        val result =  when(indexToMove) {
-            0 -> inputList[1] == 16 || inputList[4] == 16
-            1,2 -> inputList[indexToMove - 1] == 16|| inputList[indexToMove + 1] == 16 || inputList[indexToMove + 4] == 16
-            3 -> inputList[2] == 16 || inputList[7] == 16
-            12 -> inputList[8] == 16 || inputList[13] == 16
-            4,8 -> inputList[indexToMove - 4] == 16 || inputList[indexToMove + 1] == 16 || inputList[indexToMove + 4] == 16
-            7,11 -> inputList[indexToMove - 1] == 16 || inputList[indexToMove - 4] == 16 || inputList[indexToMove + 4] == 16
-            15 -> inputList[11] == 16 || inputList[14] ==16
-            13,14 -> inputList[indexToMove - 1] == 16 || inputList[indexToMove - 4] == 16 || inputList[indexToMove + 1] == 16
-            else -> inputList[indexToMove - 1] == 16 || inputList[indexToMove - 4] == 16 || inputList[indexToMove + 1] == 16 || inputList[indexToMove + 4] == 16
-        }
-
-        return result
+        val emptyPlaceIndex = inputList.indexOf(16)
+        val neighbors = listOf(
+            emptyPlaceIndex - 4,
+            emptyPlaceIndex + 4,
+            emptyPlaceIndex - 1,
+            emptyPlaceIndex + 1
+        ).filter { it in inputList.indices }
+        return indexToMove in neighbors
     }
 }
