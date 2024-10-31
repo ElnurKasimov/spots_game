@@ -47,8 +47,8 @@ class Engine(): FifteenEngine {
     }
 
     override fun isWin(playingChips: List<Int> ): Boolean {
-        val final = List(16){ it + 1 }
-        return playingChips == final
+        val finalState = List(16){ it + 1 }
+        return playingChips == finalState
     }
 
     fun isInputInRange(number: Int): Boolean  = number in 1..15
